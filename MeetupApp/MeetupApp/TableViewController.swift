@@ -11,7 +11,7 @@ import Alamofire
 
 class TableViewController: UITableViewController {
 
-	var datasource: [[String: Any]]?
+	var datasource: [[String: Any]]? // will eventually be the source data for the table
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,15 +19,15 @@ class TableViewController: UITableViewController {
 		guard let url = URL(string: "http://localhost:8080/schedule") else {
 			print("my god the url is borked")
 			return
-		}
+		} // ensure we have a good URL to make a request with
 
 		Alamofire.request(url).responseJSON { (response) in
 
-			if let json = response.result.value as? [String: Any],
+			if let json = response.result.value as? [String: Any], // make sure we have a good response
 			   let schedule = json["schedule"] as? [[String: Any]]
 			{
-				self.datasource = schedule
-				self.tableView.reloadData()
+				self.datasource = schedule // set the source data for the table
+				self.tableView.reloadData() // reload the table after downloading source data
 			}
 		}
 
@@ -41,7 +41,7 @@ class TableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 
-		guard datasource != nil else {
+		guard datasource != nil else { // if we haven't received the data from the server, don't show anything
 			return 0
 		}
 
@@ -67,7 +67,7 @@ class TableViewController: UITableViewController {
 			  let title = dataDictionary["startTime"] as? String,
 			  let event = dataDictionary["event"] as? String else {
 			return cell
-		}
+		} // get the display data from datasouce or exit
 
 		cell.textLabel?.text = title
 		cell.detailTextLabel?.text = event
