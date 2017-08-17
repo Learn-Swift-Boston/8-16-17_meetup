@@ -45,7 +45,18 @@ class TableViewController: UITableViewController {
 			return 0
 		}
 
-        return datasource!.count // don't use ! it's dangerous
+        return datasource!.count
+		/*
+			I use the ! to force unwrap datasource because the guard 
+			above it ensure's that it's not nil (since we declared it as 
+			an optional variable). While it's allowed, it's generally 
+			considered a bad practice to use ! to force unwrap optionals. 
+			
+			In this case, I used to it for explanation purposes. If you 
+			want to follow "good" standards and practices, datasource 
+			could be unwrapped in a guard like we do in other places in 
+			this file.
+		*/
     }
 
     
@@ -63,51 +74,4 @@ class TableViewController: UITableViewController {
 
         return cell
     }
-
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
